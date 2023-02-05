@@ -1,0 +1,20 @@
+.newColumn::placeholder {
+    color: #9CA4B5;
+}
+
+.newColumn {
+    padding: 5px 15px;
+    border: none;
+    overflow: auto;
+    outline: none;
+    border-radius: 6px;
+    width: 268px;
+    resize: none;
+    box-shadow: 1px 4px 3px -3px #000000;
+}
+
+body {
+    background-color: #4158D0;
+background-image: linear-gradient(90deg, #4158D0 0%, #da39d0 46%, #FFCC70 100%);
+
+}

@@ -1,0 +1,15 @@
+.enterTaskArea::placeholder {
+    color: #9ca4b5b9;
+}
+
+.enterTaskArea {
+    padding: 5px 15px;
+    border: none;
+    overflow: auto;
+    outline: none;
+    border-radius: 6px;
+    width: 268px;
+    height: 60px;
+    resize: none;
+    box-shadow: 1px 4px 3px -3px #000000;
+}
