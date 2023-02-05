@@ -24,6 +24,7 @@ const ProjectDashboard = () => {
   const addColumn = () => {
     dispatch(columnsActions.addColumn({id: crypto.randomUUID(), title: columnTitle, projectName: projectName, tasks: [], status: columnTitle}))
     setAddColumnClicked(!addColumnClicked);
+    setColumnTitle("")
   }
   return (
     <Box
@@ -74,6 +75,7 @@ const ProjectDashboard = () => {
               className="newColumn"
               style={{ width: "270px" }}
               placeholder="Enter column name..."
+              value={columnTitle}
               onChange={(e) => setColumnTitle(e.target.value)}
             />
             <Box sx={{ mt: 1.5 }}>

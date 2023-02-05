@@ -5,7 +5,7 @@ type initialStateType = {
     projects: Project[]
 }
 const initialState: initialStateType = {
-    projects: [{title: "hackathon", tasks: []}],
+    projects: [{title: "hackathon"}, {title: "frontend-project"}, {title: "backend-project"}],
 }
 
 const projectSlice = createSlice({

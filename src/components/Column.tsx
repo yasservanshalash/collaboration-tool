@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { columnsActions } from "../redux/slices/columnSlice";
 import { taskActions} from "../redux/slices/taskSlice"
 import { RootState } from "../redux/store";
+import {DragDropContext, Droppable} from "react-beautiful-dnd"
+
 const Column = ({
   column,
   tasks,
@@ -50,7 +52,9 @@ const Column = ({
         <MoreHorizIcon />
       </IconButton>
       </Box>
-      <Box
+      {/* <DragDropContext>
+        <Droppable> */}
+        <Box
         sx={{
           maxHeight: "80vh",
           overflowY: "auto",
@@ -64,6 +68,9 @@ const Column = ({
             <Task key={crypto.randomUUID()} task={task} />
           ))}
           </Box>
+        {/* </Droppable>
+      </DragDropContext> */}
+            
         <Box sx={{ my: 1.5, display: addACardClicked ? "block" : "none" }}>
           <textarea placeholder="Enter new task..." className="enterTaskArea" onChange={taskTitleHandler}/>
           <Box

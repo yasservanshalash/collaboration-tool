@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import { Column as ColumnType, Task } from './types/types'
 import Column from './components/Column'
+import Navbar from './components/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import ProjectDashboard from './pages/ProjectDashboard'
 import logo from "./assets/collab-logo-removebg-preview.png"
@@ -19,11 +20,7 @@ function App() {
   console.log(columns)  
   return (
     <div className="App">
-      <AppBar color='inherit'>
-        <Toolbar>
-          <img src={logo} width="100px"/>
-        </Toolbar>
-      </AppBar>
+      <Navbar/>
       <Routes>
         <Route path="/projects" element={<Dashboard />} />
         <Route path="/projects/:name" element={<ProjectDashboard columns={columns} tasks={tasks}/>} />
