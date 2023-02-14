@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-import { AppBar, Box, Toolbar } from '@mui/material'
+import { AppBar, Box, Container, Toolbar } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import { Column as ColumnType, Task } from './types/types'
@@ -19,14 +19,18 @@ function App() {
   const columns = useSelector((state: RootState) => state.columns.columns)
   console.log(columns)  
   return (
-    <div className="App">
+    <Box className="App" sx={{display: "flex", flexDirection: "column"}}>
+      <Box sx={{position: "absolute", top: "0px"}}>
       <Navbar/>
+      </Box>
+      <Box sx={{height: "100vh", overflowY: "scroll", overflowX: "auto"}}>
       <Routes>
         <Route path="/projects" element={<Dashboard />} />
         <Route path="/projects/:name" element={<ProjectDashboard columns={columns} tasks={tasks}/>} />
       </Routes>
+      </Box>
 
-    </div>
+    </Box>
   )
 }
 
