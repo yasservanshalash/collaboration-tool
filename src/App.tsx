@@ -23,7 +23,7 @@ function App() {
       <Box sx={{position: "absolute", top: "0px"}}>
       <Navbar/>
       </Box>
-      <Box sx={{height: "100vh", overflowY: "scroll", overflowX: "auto"}}>
+      <Box sx={{height: "100vh", overflowY: "scroll", overflowX: "scroll", flex: "1", flexGrow: "1"}}>
       <Routes>
         <Route path="/projects" element={<Dashboard />} />
         <Route path="/projects/:name" element={<ProjectDashboard columns={columns} tasks={tasks}/>} />

@@ -57,7 +57,7 @@ const Column = ({
         <Droppable> */}
         <Box
         sx={{
-          maxHeight: addACardClicked? "58.1vh" :"70vh",
+          maxHeight: addACardClicked? "57.6vh" :"70vh",
           overflowY: "auto",
           overflow: "scroll",
           scrollBehavior: "smooth",
