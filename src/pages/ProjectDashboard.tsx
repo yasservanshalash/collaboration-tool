@@ -1,5 +1,5 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Column from "../components/Column";
@@ -9,7 +9,7 @@ import {Column as Columntype, Task as TaskType } from "../types/types";
 import AddIcon from "@mui/icons-material/Add";
 import CloseButton from "@mui/icons-material/Close";
 import "./ProjectDashboard.css";
-import { columnsActions } from "../redux/slices/columnSlice";
+import { columnsActions, createDefaultColumns } from "../redux/slices/columnSlice";
 import { taskActions } from "../redux/slices/taskSlice";
 import TaskComponent from "../components/Task";
 import { 
@@ -49,7 +49,9 @@ const dropAnimation: DropAnimation = {
 };
 
 const ProjectDashboard: React.FC<ProjectDashboardProps> = ({ columns, tasks }) => {
-  const projectName = useParams().name;
+  // Get route parameter, using "hackathon" as the default project when on the root route
+  const { name } = useParams();
+  const projectName = name || "hackathon"; // Use "hackathon" as default when on root route
   const dispatch = useDispatch();
   const [addColumnClicked, setAddColumnClicked] = useState(false);
   const [columnTitle, setColumnTitle] = useState("");
@@ -57,10 +59,25 @@ const ProjectDashboard: React.FC<ProjectDashboardProps> = ({ columns, tasks }) =
   const [activeTaskData, setActiveTaskData] = useState<TaskType | null>(null);
   const [activeColumn, setActiveColumn] = useState<Columntype | null>(null);
   const [activeTaskColumn, setActiveTaskColumn] = useState<Columntype | null>(null);
+  const columnsAddedRef = useRef(false); // Track if columns have been added
   
   // Get the columns for this project
   const projectColumns = columns.filter(col => col.projectName === projectName);
   
+  // Only add default columns if none exist for this project
+  useEffect(() => {
+    // Check if this project already has columns
+    if (projectName && projectColumns.length === 0 && !columnsAddedRef.current) {
+      console.log(`Adding default columns for project: ${projectName}`);
+      
+      // Mark as processed so we don't trigger this effect again
+      columnsAddedRef.current = true;
+      
+      // Add default columns for this project
+      dispatch(columnsActions.addDefaultColumns(projectName));
+    }
+  }, [projectName, projectColumns.length, dispatch]);
+
   // Configure sensors for better touch/mouse handling
   const sensors = useSensors(
     useSensor(PointerSensor, {

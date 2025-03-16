@@ -59,6 +59,7 @@ const Column = ({
   };
   
   const handleDeleteColumn = () => {
+    console.log("Deleting column with ID:", column.id);
     dispatch(columnsActions.deleteColumn(column.id));
     handleMenuClose();
   };

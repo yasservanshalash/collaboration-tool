@@ -5,6 +5,33 @@ type initialStateType = {
   columns: Column[];
 };
 
+// Function to create default columns for a project
+export const createDefaultColumns = (projectName: string) => {
+  return [
+    {
+      id: crypto.randomUUID(),
+      title: "To Do",
+      tasks: [],
+      projectName: projectName,
+      status: "todo",
+    },
+    {
+      id: crypto.randomUUID(),
+      title: "Doing",
+      tasks: [],
+      projectName: projectName,
+      status: "doing",
+    },
+    {
+      id: crypto.randomUUID(),
+      title: "Done",
+      tasks: [],
+      projectName: projectName,
+      status: "done",
+    },
+  ];
+};
+
 const initialState: initialStateType = {
   columns: [
     {
@@ -40,6 +67,16 @@ const columnSlice = createSlice({
     addColumn: (state, action) => {
       state.columns.push(action.payload);
       console.log("new column added")
+    },
+    deleteColumn: (state, action) => {
+      state.columns = state.columns.filter(column => column.id !== action.payload);
+      console.log("column deleted:", action.payload);
+    },
+    addDefaultColumns: (state, action) => {
+      const projectName = action.payload;
+      const defaultColumns = createDefaultColumns(projectName);
+      state.columns = [...state.columns, ...defaultColumns];
+      console.log(`Default columns added for project: ${projectName}`);
     },
     reorderColumns: (state, action) => {
       const { activeId, overId, projectName } = action.payload;

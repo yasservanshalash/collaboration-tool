@@ -12,7 +12,10 @@ const projectSlice = createSlice({
     name: "projects",
     initialState,
     reducers: {
-
+        addProject: (state, action) => {
+            state.projects.push(action.payload);
+            console.log("New project added:", action.payload.title);
+        }
     }
 })
 
