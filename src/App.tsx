@@ -25,6 +25,7 @@ function App() {
       </Box>
       <Box sx={{height: "100vh", overflowY: "scroll", overflowX: "scroll", flex: "1", flexGrow: "1"}}>
       <Routes>
+        <Route path="/" element={<ProjectDashboard columns={columns} tasks={tasks}/>} />
         <Route path="/projects" element={<Dashboard />} />
         <Route path="/projects/:name" element={<ProjectDashboard columns={columns} tasks={tasks}/>} />
       </Routes>

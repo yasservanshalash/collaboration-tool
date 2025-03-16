@@ -40,6 +40,32 @@ const columnSlice = createSlice({
     addColumn: (state, action) => {
       state.columns.push(action.payload);
       console.log("new column added")
+    },
+    reorderColumns: (state, action) => {
+      const { activeId, overId, projectName } = action.payload;
+      
+      // Find the position of active and over columns
+      const projectColumns = state.columns.filter(col => col.projectName === projectName);
+      const allColumns = [...state.columns];
+      
+      // Find indices in the filtered array
+      const activeColumnIndex = projectColumns.findIndex(col => col.id === activeId);
+      const overColumnIndex = projectColumns.findIndex(col => col.id === overId);
+      
+      if (activeColumnIndex !== -1 && overColumnIndex !== -1) {
+        // Find the absolute indices in the full columns array
+        const activeAbsoluteIndex = allColumns.findIndex(col => col.id === activeId);
+        const overAbsoluteIndex = allColumns.findIndex(col => col.id === overId);
+        
+        // Remove the active column
+        const [removedColumn] = allColumns.splice(activeAbsoluteIndex, 1);
+        
+        // Insert at the new position
+        allColumns.splice(overAbsoluteIndex, 0, removedColumn);
+        
+        // Update the state
+        state.columns = allColumns;
+      }
     }
   },
 });
